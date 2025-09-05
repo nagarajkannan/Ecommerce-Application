@@ -14,6 +14,11 @@ import profilerouter from './routes/profileroute.js'
 const app=express()
 const port=process.env.port || 4000
 connectDb();
+import cors from 'cors';
+app.use(cors({
+  origin: ['https://ecommerce-application-2-162t.onrender.com']
+}));
+
 
 //middlewares
 app.use(express.json())
