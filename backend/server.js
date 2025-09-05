@@ -11,10 +11,10 @@ import profilerouter from './routes/profileroute.js';
 const app = express();
 const port = process.env.PORT || 4000;
 
-// Connect to DB
+// Connect to MongoDB
 connectDb();
 
-// CORS configuration
+// Configure CORS
 app.use(cors({
   origin: [
     'http://localhost:4173', // local frontend
@@ -41,6 +41,4 @@ app.get('/', (req, res) => {
 });
 
 // Start server
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+app.listen(port, () => console.log(`Server running on port ${port}`));
