@@ -14,7 +14,7 @@ const port = process.env.PORT || 4000;
 // Connect to MongoDB
 connectDb();
 
-// Configure CORS
+// CORS: allow frontend origins
 app.use(cors({
   origin: [
     'http://localhost:4173', // local frontend
@@ -29,16 +29,14 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
 // Routes
-app.use('/api/user/', userrouter);
-app.use('/api/product/', productrouter);
+app.use('/api/user', userrouter);
+app.use('/api/product', productrouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/profile', profilerouter);
 
 // Default route
-app.get('/', (req, res) => {
-  res.send("home");
-});
+app.get('/', (req, res) => res.send("Home"));
 
 // Start server
 app.listen(port, () => console.log(`Server running on port ${port}`));
