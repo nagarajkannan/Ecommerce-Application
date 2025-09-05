@@ -4,56 +4,65 @@ import { toast } from "react-toastify";
 import { Shopcontext } from "../context/Shopcontext";
 
 const Login = () => {
-  const [currentState, setCurrentState] = useState("Sign In"); // Sign In | SignUp | Admin
+  const [currentState, setCurrentState] = useState("Sign In"); // User | Admin | SignUp
   const { token, setToken, navigate, backendUrl } = useContext(Shopcontext);
 
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
 
     try {
-      let endpoint = "";
-      let payload = { email, password };
-
       if (currentState === "SignUp") {
-        endpoint = "/api/user/register";
-        payload = { name, email, password };
-      } else if (currentState === "Sign In") {
-        endpoint = "/api/user/login";
-      } else if (currentState === "Admin") {
-        endpoint = "/api/user/admin";
-      }
+        const response = await axios.post(`${backendUrl}/api/user/register`, {
+          name,
+          email,
+          password,
+        });
 
-      const response = await axios.post(`${backendUrl}${endpoint}`, payload);
-
-      if (response.data.success) {
-        setToken(response.data.token);
-        localStorage.setItem("token", response.data.token);
-
-        // Role-based redirect
-        if (response.data.role === "admin") {
-          window.location.href = "/admin";
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem("token", response.data.token);
         } else {
-          navigate("/");
+          toast.error(response.data.message);
+        }
+      } else if (currentState === "Sign In") {
+        const response1 = await axios.post(`${backendUrl}/api/user/login`, {
+          email,
+          password,
+        });
+
+        if (response1.data.success) {
+          setToken(response1.data.token);
+          localStorage.setItem("token", response1.data.token);
+        } else {
+          toast.error(response1.data.message);
         }
 
-      } else {
-        toast.error(response.data.message);
-      }
+        const response = await axios.post(`${backendUrl}/api/user/admin`, {
+          email,
+          password,
+        });
 
-    } catch (err) {
-      console.error(err);
-      toast.error(err.response?.data?.message || "Server error");
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem("token", response.data.token);
+          window.location.href = "http://localhost:5174/";
+        } else {
+          toast.error(response.data.message);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
     }
   };
 
-  // Redirect logged-in users (non-admin)
   useEffect(() => {
     if (token && currentState !== "Admin") {
-      navigate("/");
+      navigate("/"); // users go home
     }
   }, [token]);
 
@@ -61,41 +70,45 @@ const Login = () => {
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center px-4"
       style={{
-        backgroundImage: "url('https://images.unsplash.com/photo-1523275335684-37898b6baf30')"
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1523275335684-37898b6baf30')", // simple ecommerce background
       }}
     >
       <form
         className="bg-white shadow-lg rounded-xl p-8 w-full sm:max-w-md flex flex-col gap-5 border border-gray-200"
         onSubmit={onSubmit}
       >
-        <h2 className="text-2xl font-bold text-center text-gray-800">{currentState}</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800">
+          {currentState}
+        </h2>
 
         {currentState === "SignUp" && (
           <input
             type="text"
-            placeholder="Full Name"
-            value={name}
             onChange={(e) => setName(e.target.value)}
+            value={name}
             className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
+            placeholder="Full Name"
             required
           />
         )}
 
         <input
           type="email"
-          placeholder="Email Address"
-          value={email}
           onChange={(e) => setEmail(e.target.value)}
+          value={email}
           className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
+          placeholder="Email Address"
           required
         />
 
         <input
           type="password"
-          placeholder="Password"
-          value={password}
+          autoComplete="current-password"
           onChange={(e) => setPassword(e.target.value)}
+          value={password}
           className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
+          placeholder="Password"
           required
         />
 
@@ -121,15 +134,6 @@ const Login = () => {
         <button className="bg-black text-white font-semibold py-3 rounded-lg hover:bg-gray-800 active:scale-95 transition duration-200">
           {currentState === "SignUp" ? "Sign Up" : "Login"}
         </button>
-
-        {currentState !== "SignUp" && (
-          <p
-            className="cursor-pointer text-center mt-2 text-blue-600 hover:underline"
-            onClick={() => setCurrentState("Admin")}
-          >
-            Admin Login
-          </p>
-        )}
       </form>
     </div>
   );
