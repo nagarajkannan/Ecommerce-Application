@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
+  import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/' // ✅ root path for Render hosting
+  base: '/Ecommerce-Application/',  // 👈 must match repo name exactly
 })
