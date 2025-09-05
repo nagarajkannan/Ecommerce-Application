@@ -11,54 +11,30 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      if (currentState === "SignUp") {
-        const response = await axios.post(`${backendUrl}/api/user/register`, {
-          name,
-          email,
-          password,
-        });
-
-        if (response.data.success) {
-          setToken(response.data.token);
-          localStorage.setItem("token", response.data.token);
-        } else {
-          toast.error(response.data.message);
-        }
-      } else if (currentState === "Sign In") {
-        const response1 = await axios.post(`${backendUrl}/api/user/login`, {
-          email,
-          password,
-        });
-
-        if (response1.data.success) {
-          setToken(response1.data.token);
-          localStorage.setItem("token", response1.data.token);
-        } else {
-          toast.error(response1.data.message);
-        }
-
-        const response = await axios.post(`${backendUrl}/api/user/admin`, {
-          email,
-          password,
-        });
-
-        if (response.data.success) {
-          setToken(response.data.token);
-          localStorage.setItem("token", response.data.token);
-          window.location.href = "http://localhost:5174/";
-        } else {
-          toast.error(response.data.message);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+ const onSubmit = async (event) => {
+  event.preventDefault();
+  try {
+    if (currentState === "SignUp") {
+      const response = await axios.post(`${backendUrl}/api/user/register`, { name, email, password });
+      if (response.data.success) {
+        setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        navigate("/"); // redirect after signup
+      } else toast.error(response.data.message);
+    } else if (currentState === "Sign In") {
+      const response = await axios.post(`${backendUrl}/api/user/login`, { email, password });
+      if (response.data.success) {
+        setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        navigate("/"); // redirect after login
+      } else toast.error(response.data.message);
     }
-  };
+  } catch (error) {
+    console.error(error);
+    toast.error(error.message);
+  }
+};
+
 
   useEffect(() => {
     if (token && currentState !== "Admin") {
