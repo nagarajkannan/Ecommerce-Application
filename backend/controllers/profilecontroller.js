@@ -6,7 +6,7 @@ export const myprofile=async(req,res)=>{
         if(!token){
             return res.json({success:false,message:"id not found"})
         }
-        const decode=jwt.verify(token,process.env.JWT_SECERET_KEY)
+        const decode=jwt.verify(token,process.env.JWT_SECRET_KEY)
         const user=await  userModel.findById(decode.id)
         if (!user) {
       return res.status(404).json({ success: false, message: "User not found" })

@@ -6,7 +6,7 @@ import { productmodel } from '../models/productmodel.js'
 
 
 const createToken=(id)=>{
-    return jwt.sign({id},process.env.JWT_SECERET_KEY)
+    return jwt.sign({id},process.env.JWT_SECRET_KEY)
 }                                                                                              
 export const loginuser = async (req, res) => {
   try {
@@ -77,18 +77,19 @@ export const registeruser=async(req,res)=>{
   }
 }
 //router for admin login
-export const adminlogin=async(req,res)=>{
-    try {
-        const {email,password}=req.body
-        if(email===process.env.ADMIN_EMAIL && password===process.env.ADMIN_PASSWORD){
-             const token=jwt.sign(email+password,process.env.JWT_SECERET_KEY)
-             res.json({success:true,token})
-        }
-    } catch (error) {
-        console.log(error);
-    res.json({success:false,messsage:'error'})
+export const adminlogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+      const token = jwt.sign({ email }, process.env.JWT_SECRET_KEY);
+      res.json({ success: true, token });
+    } else {
+      res.json({ success: false, message: "Invalid admin credentials" });
     }
-   
-    
-}
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "error" });
+  }
+};
+
 
