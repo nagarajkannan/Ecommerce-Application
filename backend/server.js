@@ -1,25 +1,27 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
-
 import connectDb from './config/mongodb.js';
-import cloudinary from './config/cloudnary.js';
 import userrouter from './routes/userroute.js';
 import productrouter from './routes/productroute.js';
 import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderroute.js';
 import profilerouter from './routes/profileroute.js';
 
-// App config
 const app = express();
 const port = process.env.PORT || 4000;
 
+// Connect to DB
 connectDb();
 
 // CORS configuration
 app.use(cors({
-  origin: ['https://ecommerce-application-2-162t.onrender.com'], // frontend URL
-  credentials: true,
+  origin: [
+    'http://localhost:4173', // local frontend
+    'https://ecommerce-application-2-162t.onrender.com' // deployed frontend
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
 }));
 
 // Middlewares
@@ -33,12 +35,12 @@ app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/profile', profilerouter);
 
-// Test route
+// Default route
 app.get('/', (req, res) => {
-    res.send("Home");
+  res.send("home");
 });
 
 // Start server
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
