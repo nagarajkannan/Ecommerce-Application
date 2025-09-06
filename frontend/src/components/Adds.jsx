@@ -11,7 +11,7 @@ const Adds = ({ ads, currentIndex, setCurrentIndex }) => {
   if (!ads.length) return null;
 
   return (
-    <div className="relative w-full  h-full overflow-hidden">
+    <div className="relative w-full h-64 sm:h-80 md:h-[450px] lg:h-[600px] overflow-hidden">
       {ads.map((product, index) => (
         <div
           key={product._id}
@@ -22,7 +22,7 @@ const Adds = ({ ads, currentIndex, setCurrentIndex }) => {
           <img
             src={product.image[0]}
             alt={product.name}
-            className="w-full h-full object-cover" 
+            className="w-full h-full object-cover"
           />
         </div>
       ))}
@@ -35,7 +35,7 @@ const Adds = ({ ads, currentIndex, setCurrentIndex }) => {
             onClick={() => setCurrentIndex(index)}
             className={`w-3 h-3 rounded-full ${
               currentIndex === index ? "bg-white" : "bg-gray-400"
-            }`} 
+            }`}
           />
         ))}
       </div>

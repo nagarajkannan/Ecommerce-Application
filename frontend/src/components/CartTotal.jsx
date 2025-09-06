@@ -9,45 +9,38 @@ const CartTotal = () => {
   const total = subtotal === 0 ? 0 : subtotal + delivery_fee + tax;
 
   return (
-    <div className="w-full flex flex-col gap-3 p-9">
-      <div className="text-3xl mb-3font-semibold">
-        <p>CART TOTAL</p>
+    <div className="w-full max-w-md mx-auto sm:mx-0 flex flex-col gap-4 p-6 sm:p-9 bg-white rounded-xl shadow-md">
+      {/* Header */}
+      <div className="text-2xl sm:text-3xl font-semibold mb-4 text-gray-800">
+        CART TOTAL
       </div>
 
-      <div className="flex flex-col gap-4 mt-2 text-lg">
+      <div className="flex flex-col gap-3 text-sm sm:text-base">
         {/* Subtotal */}
         <div className="flex justify-between">
-          <p>Subtotal</p>
-          <p>
-            {currency} {subtotal.toFixed(2)}
-          </p>
+          <span>Subtotal</span>
+          <span>{currency} {subtotal.toFixed(2)}</span>
         </div>
         <hr />
 
         {/* Shipping */}
         <div className="flex justify-between">
-          <p>Shipping Fee</p>
-          <p>
-            {currency} {delivery_fee.toFixed(2)}
-          </p>
+          <span>Shipping Fee</span>
+          <span>{currency} {delivery_fee.toFixed(2)}</span>
         </div>
         <hr />
 
         {/* Tax */}
         <div className="flex justify-between">
-          <p>Estimated Tax (5%)</p>
-          <p>
-            {currency} {tax.toFixed(2)}
-          </p>
+          <span>Estimated Tax (5%)</span>
+          <span>{currency} {tax.toFixed(2)}</span>
         </div>
         <hr />
 
-        {/* Final Total */}
-        <div className="flex justify-between font-bold text-xl">
-          <p>Total</p>
-          <p>
-            {currency} {total.toFixed(2)}
-          </p>
+        {/* Total */}
+        <div className="flex justify-between font-bold text-lg sm:text-xl mt-2">
+          <span>Total</span>
+          <span>{currency} {total.toFixed(2)}</span>
         </div>
       </div>
     </div>

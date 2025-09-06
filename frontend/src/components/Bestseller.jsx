@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Shopcontext } from '../context/Shopcontext';
-import Productitem from './Productitem';
+import React, { useContext, useEffect, useState } from "react";
+import { Shopcontext } from "../context/Shopcontext";
+import Productitem from "./Productitem";
 
 const Bestseller = () => {
   const { products } = useContext(Shopcontext);
@@ -12,19 +12,20 @@ const Bestseller = () => {
   }, [products]);
 
   return (
-    <div className=" px-4 md:px-10 max-w-8xl mx-auto">
+    <div className="px-3 sm:px-6 md:px-10 max-w-8xl mx-20">
       {/* Header */}
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-6xl font-bold text-gray-800 mb-4 tracking-tight">
+      <div className="text-center mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold text-gray-800 mb-3 sm:mb-4 tracking-tight">
           Best Sellers
         </h2>
-        <p className="text-gray-600 text-sm md:text-base max-w-5xl mx-auto leading-relaxed">
-          Our top-selling picks, loved by customers for quality, style, and value. Don’t miss out on what everyone’s shopping.
+        <p className="text-gray-600 text-xs sm:text-sm md:text-base max-w-3xl md:max-w-5xl mx-auto leading-relaxed">
+          Our top-selling picks, loved by customers for quality, style, and value. 
+          Don’t miss out on what everyone’s shopping.
         </p>
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-2 mx-20 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
         {bestseller.map((item, index) => (
           <div
             key={index}

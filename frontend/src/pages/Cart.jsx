@@ -4,9 +4,7 @@ import { assets } from "../assets/assets";
 import CartTotal from "../components/CartTotal";
 
 const Cart = () => {
-  const { currency, products, cartitems, updateQuantity, navigate } =
-    useContext(Shopcontext);
-
+  const { currency, products, cartitems, updateQuantity, navigate } = useContext(Shopcontext);
   const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
@@ -16,11 +14,7 @@ const Cart = () => {
         for (const size in cartitems[productId]) {
           const quantity = cartitems[productId][size];
           if (quantity > 0) {
-            tempData.push({
-              _id: productId,
-              size,
-              quantity,
-            });
+            tempData.push({ _id: productId, size, quantity });
           }
         }
       }
@@ -29,10 +23,10 @@ const Cart = () => {
   }, [cartitems, products]);
 
   return (
-    <div className="min-h-screen mx-20 px-4 sm:px-10">
+    <div className="min-h-screen px-4 sm:px-6 lg:px-20 py-8">
       <h1 className="text-3xl font-semibold mb-6 text-center sm:text-left">Your Cart</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 lg:gap-10">
         {/* Cart Items */}
         <div className="space-y-6">
           {cartData.length === 0 ? (
@@ -45,45 +39,42 @@ const Cart = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-lg shadow p-9 flex flex-col sm:flex-row items-center gap-6"
+                  className="bg-white rounded-lg shadow p-4 sm:p-6 flex flex-col sm:flex-row items-center gap-4 sm:gap-6"
                 >
                   <img
                     src={productData.image[0]}
                     alt={productData.name}
-                    className="w-28 h-28 object-cover rounded"
+                    className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded"
                   />
 
                   <div className="flex-1 w-full space-y-2">
-                    <p className="text-lg font-medium">{productData.name}</p>
+                    <p className="text-lg font-medium truncate">{productData.name}</p>
 
-                    <div className="flex items-center gap-3 text-sm text-gray-600">
+                    <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
                       <span className="bg-gray-100 px-3 py-1 rounded">{item.size}</span>
                       <span>
-                        {currency}
-                        {productData.price}
+                        {currency} {productData.price}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-3 mt-2">
+                    <div className="flex flex-wrap items-center gap-3 mt-2">
                       <input
                         type="number"
                         min={1}
                         defaultValue={item.quantity}
                         onChange={(e) => {
                           const value = Number(e.target.value);
-                          if (value >= 1) {
-                            updateQuantity(item._id, item.size, value);
-                          }
+                          if (value >= 1) updateQuantity(item._id, item.size, value);
                         }}
-                        className="w-16 border rounded px-2 py-1 text-center focus:outline-none focus:ring-2 focus:ring-orange-400"
+                        className="w-16 sm:w-20 border rounded px-2 py-1 text-center focus:outline-none focus:ring-2 focus:ring-orange-400"
                       />
 
                       <button
                         onClick={() => updateQuantity(item._id, item.size, 0)}
-                        className="text-red-500 hover:text-red-700 transition"
+                        className="text-red-500 hover:text-red-700 transition flex items-center justify-center"
                         title="Remove"
                       >
-                        <img src={assets.bin_icon} alt="Remove" className="w-5" />
+                        <img src={assets.bin_icon} alt="Remove" className="w-5 sm:w-6 h-auto" />
                       </button>
                     </div>
                   </div>
@@ -94,12 +85,12 @@ const Cart = () => {
         </div>
 
         {/* Checkout Sidebar */}
-        <div className="w-full bg-white shadow rounded-lg p-6 h-fit">
+        <div className="w-full bg-white shadow rounded-lg p-4 sm:p-6 h-fit">
           <CartTotal />
 
           <button
             onClick={() => navigate("/place-order")}
-            className="w-full mt-6 bg-black hover:bg-orange-600 transition text-white py-3 rounded-lg text-sm font-medium"
+            className="w-full mt-6 bg-black hover:bg-orange-600 transition text-white py-3 rounded-lg text-sm sm:text-base font-medium"
           >
             Proceed to Checkout
           </button>

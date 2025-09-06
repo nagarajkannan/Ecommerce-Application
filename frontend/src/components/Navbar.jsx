@@ -23,15 +23,19 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-sm py-5 border-b border-gray-200">
+    <nav className="bg-white shadow-sm py-3 md:py-5 border-b border-gray-200">
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <NavLink to="/" className="flex items-center">
-          <img src={assets.logo} alt="Logo" className="w-40" />
+          <img
+            src={assets.logo}
+            alt="Logo"
+            className="w-28 sm:w-32 md:w-40"
+          />
         </NavLink>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex items-center gap-8 text-2xl font-medium">
+        <ul className="hidden md:flex items-center gap-6 lg:gap-8 text-lg lg:text-2xl font-medium">
           <li>
             <NavLink
               to="/"
@@ -83,15 +87,13 @@ const Navbar = () => {
         </ul>
 
         {/* Right Side */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
           {/* Search */}
           <img
-            onClick={() => {
-              setShowSearch(true);
-            }}
+            onClick={() => setShowSearch(true)}
             src={assets.search_icon}
             alt="Search"
-            className="w-7 h-7 cursor-pointer"
+            className="w-6 h-6 sm:w-7 sm:h-7 cursor-pointer"
           />
 
           {/* Profile Dropdown Toggle */}
@@ -100,7 +102,7 @@ const Navbar = () => {
               <img
                 src={assets.profile_icon}
                 alt="Profile"
-                className="w-9 h-9 cursor-pointer"
+                className="w-8 h-8 sm:w-9 sm:h-9 cursor-pointer"
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
               />
             </Link>
@@ -128,7 +130,7 @@ const Navbar = () => {
                 <li>
                   <p
                     onClick={logout}
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   >
                     Log Out
                   </p>
@@ -139,7 +141,7 @@ const Navbar = () => {
 
           {/* Cart Icon */}
           <Link to="/cart" className="relative">
-            <img src={assets.cart_icon} alt="Cart" className="w-7 h-7" />
+            <img src={assets.cart_icon} alt="Cart" className="w-6 h-6 sm:w-7 sm:h-7" />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
               {getCartCount()}
             </span>
@@ -149,7 +151,7 @@ const Navbar = () => {
           <img
             src={assets.menu_icon}
             alt="Menu"
-            className="w-9 h-9 cursor-pointer md:hidden"
+            className="w-8 h-8 sm:w-9 sm:h-9 cursor-pointer md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           />
         </div>
@@ -157,32 +159,32 @@ const Navbar = () => {
 
       {/* Mobile Nav Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden px-4 pt-4 pb-2 space-y-2 text-base font-medium bg-white shadow-md border-t border-gray-200">
+        <div className="md:hidden px-4 pt-4 pb-2 space-y-2 text-base sm:text-lg font-medium bg-white shadow-md border-t border-gray-200">
           <NavLink
             to="/"
             onClick={() => setMobileMenuOpen(false)}
-            className="block hover:text-blue-600"
+            className="block py-2 hover:text-blue-600"
           >
             Home
           </NavLink>
           <NavLink
             to="/collections"
             onClick={() => setMobileMenuOpen(false)}
-            className="block hover:text-blue-600"
+            className="block py-2 hover:text-blue-600"
           >
             Collections
           </NavLink>
           <NavLink
             to="/about"
             onClick={() => setMobileMenuOpen(false)}
-            className="block hover:text-blue-600"
+            className="block py-2 hover:text-blue-600"
           >
             About
           </NavLink>
           <NavLink
             to="/contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="block hover:text-blue-600"
+            className="block py-2 hover:text-blue-600"
           >
             Contact
           </NavLink>

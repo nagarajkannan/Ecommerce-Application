@@ -9,8 +9,12 @@ const RelatedProducts = ({ category, subCategory, currentProductId }) => {
   useEffect(() => {
     if (products.length > 0 && category && subCategory) {
       let relatedProducts = products
-        .filter((item) => item.category === category && item.subCategory === subCategory)
-        .filter((item) => item._id !== currentProductId)
+        .filter(
+          (item) =>
+            item.category === category &&
+            item.subCategory === subCategory &&
+            item._id !== currentProductId
+        )
         .slice(0, 5);
 
       setRelated(relatedProducts);
@@ -18,13 +22,17 @@ const RelatedProducts = ({ category, subCategory, currentProductId }) => {
   }, [products, category, subCategory, currentProductId]);
 
   return (
-    <div className="my-24 px-4 sm:px-0">
-      <div className="text-center text-3xl font-semibold py-2">
-        <p className="mb-8 md:text-4xl">RELATED PRODUCTS</p>
+    <div className="my-16 sm:my-20 md:my-24 px-3 sm:px-6 md:px-10 max-w-8xl mx-auto">
+      {/* Header */}
+      <div className="text-center mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-800 tracking-tight">
+          Related Products
+        </h2>
       </div>
 
+      {/* Product Grid */}
       {related.length > 0 ? (
-        <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
           {related.map((item) => (
             <Productitem
               key={item._id}
@@ -36,7 +44,9 @@ const RelatedProducts = ({ category, subCategory, currentProductId }) => {
           ))}
         </div>
       ) : (
-        <div className="text-center text-gray-500 mt-8">No related products found.</div>
+        <div className="text-center text-gray-500 mt-8 text-sm sm:text-base">
+          No related products found.
+        </div>
       )}
     </div>
   );
