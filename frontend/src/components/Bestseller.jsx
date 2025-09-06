@@ -36,6 +36,8 @@ const Bestseller = () => {
               image={item.image}
               name={item.name}
               price={item.price}
+              // Pass responsive width/height
+              imgClass="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64"
             />
           </div>
         ))}

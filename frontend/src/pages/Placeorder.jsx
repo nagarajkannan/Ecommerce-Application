@@ -96,9 +96,7 @@ const Placeorder = () => {
           break;
 
         case "netBanking":
-          {
-            toast.info("Net Banking payment is not implemented yet.");
-          }
+          toast.info("Net Banking payment is not implemented yet.");
           break;
 
         default:
@@ -112,15 +110,15 @@ const Placeorder = () => {
   return (
     <form
       onSubmit={onSubmitHandler}
-      className="flex flex-col sm:flex-row justify-center gap-12 pt-10 sm:pt-16 px-6 sm:px-16 min-h-[80vh] border-t bg-gray-50"
+      className="flex flex-col lg:flex-row justify-center gap-8 lg:gap-12 pt-10 px-4 sm:px-10 min-h-[80vh] bg-gray-50 border-t"
     >
       {/* Left Side - Delivery Info */}
-      <div className="flex flex-col gap-6 w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-semibold mb-4 text-gray-800">
+      <div className="flex flex-col gap-6 w-full lg:max-w-lg bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl sm:text-3xl font-semibold mb-4 text-gray-800">
           Delivery Information
         </h2>
 
-        <div className="flex gap-6">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
           <input
             onChange={onChangeHandler}
             name="firstName"
@@ -128,7 +126,7 @@ const Placeorder = () => {
             type="text"
             placeholder="First Name"
             required
-            className="flex-1 border border-gray-300 rounded-md p-4 outline-none transition focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+            className="flex-1 border border-gray-300 rounded-md p-3 outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
           />
           <input
             onChange={onChangeHandler}
@@ -137,7 +135,7 @@ const Placeorder = () => {
             type="text"
             placeholder="Last Name"
             required
-            className="flex-1 border border-gray-300 rounded-md p-4 outline-none transition focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+            className="flex-1 border border-gray-300 rounded-md p-3 outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
           />
         </div>
 
@@ -148,7 +146,7 @@ const Placeorder = () => {
           type="email"
           placeholder="Email"
           required
-          className="border border-gray-300 rounded-md p-4 outline-none transition focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+          className="border border-gray-300 rounded-md p-3 outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
         />
         <input
           onChange={onChangeHandler}
@@ -157,10 +155,10 @@ const Placeorder = () => {
           type="text"
           placeholder="Address"
           required
-          className="border border-gray-300 rounded-md p-4 outline-none transition focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+          className="border border-gray-300 rounded-md p-3 outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
         />
 
-        <div className="flex gap-6">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
           <input
             onChange={onChangeHandler}
             name="city"
@@ -168,7 +166,7 @@ const Placeorder = () => {
             type="text"
             placeholder="City"
             required
-            className="flex-1 border border-gray-300 rounded-md p-4 outline-none transition focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+            className="flex-1 border border-gray-300 rounded-md p-3 outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
           />
           <input
             onChange={onChangeHandler}
@@ -177,11 +175,11 @@ const Placeorder = () => {
             type="text"
             placeholder="State"
             required
-            className="flex-1 border border-gray-300 rounded-md p-4 outline-none transition focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+            className="flex-1 border border-gray-300 rounded-md p-3 outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
           />
         </div>
 
-        <div className="flex gap-6">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
           <input
             onChange={onChangeHandler}
             name="zipcode"
@@ -189,7 +187,7 @@ const Placeorder = () => {
             type="text"
             placeholder="Zip Code"
             required
-            className="flex-1 border border-gray-300 rounded-md p-4 outline-none transition focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+            className="flex-1 border border-gray-300 rounded-md p-3 outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
           />
           <input
             onChange={onChangeHandler}
@@ -198,7 +196,7 @@ const Placeorder = () => {
             type="text"
             placeholder="Country"
             required
-            className="flex-1 border border-gray-300 rounded-md p-4 outline-none transition focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+            className="flex-1 border border-gray-300 rounded-md p-3 outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
           />
         </div>
 
@@ -209,56 +207,50 @@ const Placeorder = () => {
           type="tel"
           placeholder="Phone Number"
           required
-          className="border border-gray-300 rounded-md p-4 outline-none transition focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+          className="border border-gray-300 rounded-md p-3 outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
         />
       </div>
 
       {/* Right Side - Payment and Summary */}
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg flex flex-col justify-between">
+      <div className="w-full lg:max-w-md bg-white p-6 sm:p-8 rounded-lg shadow-lg flex flex-col justify-between">
         <div>
-          <h2 className="text-3xl font-semibold mb-6 text-gray-800">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-6 text-gray-800">
             Payment Method
           </h2>
-          <div className="flex flex-col gap-6 sm:flex-row sm:gap-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:gap-4">
             {/* UPI */}
             <button
               type="button"
               onClick={() => setMethod("upi")}
-              className={`flex flex-col items-center gap-3 p-5 border rounded-lg cursor-pointer transition-shadow duration-300 ease-in-out ${
+              className={`flex-1 flex flex-col items-center gap-3 p-4 border rounded-lg cursor-pointer transition-shadow duration-300 ease-in-out ${
                 method === "upi"
                   ? "border-orange-500 shadow-lg bg-orange-50"
                   : "border-gray-300 hover:shadow-md hover:bg-orange-50"
               }`}
             >
-              <img src={assets.upilogo} alt="UPI" className="w-24 h-auto" />
-              <span className="text-lg font-medium text-gray-700">UPI</span>
+              <img src={assets.upilogo} alt="UPI" className="w-20 h-auto" />
+              <span className="text-gray-700 font-medium">UPI</span>
             </button>
 
             {/* Net Banking */}
             <button
               type="button"
               onClick={() => setMethod("netBanking")}
-              className={`flex flex-col items-center gap-3 p-5 border rounded-lg cursor-pointer transition-shadow duration-300 ease-in-out ${
+              className={`flex-1 flex flex-col items-center gap-3 p-4 border rounded-lg cursor-pointer transition-shadow duration-300 ease-in-out ${
                 method === "netBanking"
                   ? "border-orange-500 shadow-lg bg-orange-50"
                   : "border-gray-300 hover:shadow-md hover:bg-orange-50"
               }`}
             >
-              <img
-                src={assets.netbankinglogo}
-                alt="Net Banking"
-                className="w-20 h-auto"
-              />
-              <span className="text-lg font-medium text-gray-700">
-                Net Banking
-              </span>
+              <img src={assets.netbankinglogo} alt="Net Banking" className="w-20 h-auto" />
+              <span className="text-gray-700 font-medium">Net Banking</span>
             </button>
 
-            {/* Cash On Delivery */}
+            {/* COD */}
             <button
               type="button"
               onClick={() => setMethod("cod")}
-              className={`flex flex-col items-center justify-center gap-3 p-5 border rounded-lg cursor-pointer transition-shadow duration-300 ease-in-out ${
+              className={`flex-1 flex flex-col items-center justify-center gap-3 p-4 border rounded-lg cursor-pointer transition-shadow duration-300 ease-in-out ${
                 method === "cod"
                   ? "border-orange-500 shadow-lg bg-orange-50"
                   : "border-gray-300 hover:shadow-md hover:bg-orange-50"
@@ -266,36 +258,24 @@ const Placeorder = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-12 w-12 text-gray-600"
+                className="h-10 w-10 text-gray-600"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8c-1.657 0-3 1.343-3 3v1h6v-1c0-1.657-1.343-3-3-3z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 14h6m-6 4h6"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v1h6v-1c0-1.657-1.343-3-3-3z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 14h6m-6 4h6" />
               </svg>
-              <span className="text-lg font-medium text-gray-700">
-                Cash On Delivery
-              </span>
+              <span className="text-gray-700 font-medium">Cash On Delivery</span>
             </button>
           </div>
         </div>
 
-        <div className="mt-12">
+        <div className="mt-8">
           <CartTotal />
           <button
             type="submit"
-            className="w-full mt-8 bg-black hover:bg-orange-600 transition-colors text-white py-4 rounded-lg text-xl font-semibold shadow-md"
+            className="w-full mt-6 bg-black hover:bg-orange-600 transition-colors text-white py-3 rounded-lg text-lg font-semibold shadow-md"
           >
             Place Order
           </button>
