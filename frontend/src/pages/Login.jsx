@@ -49,7 +49,7 @@ const Login = () => {
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem("token", response.data.token);
-          window.location.href = "http://localhost:5174/";
+          window.location.href = "https://admin-iv38.onrender.com";
         } else {
           toast.error(response.data.message);
         }
